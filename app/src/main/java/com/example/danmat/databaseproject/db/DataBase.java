@@ -70,16 +70,26 @@ public class DataBase extends SQLiteOpenHelper {
 
     public ArrayList<Pet> getTop5() {
         ArrayList<Pet> petsList = new ArrayList<>();
-        String query = "SELECT * FROM " + DataBaseConstants.TABLE_PETS +
-                " AS p WHERE p.";
+        String query = "SELECT p." + DataBaseConstants.TABLE_PETS_ID +
+                ", p." + DataBaseConstants.TABLE_PETS_NAME +
+                ", p." + DataBaseConstants.TABLE_PETS_AVATAR +
+                ", COUNT(p." + DataBaseConstants.TABLE_PETS_ID + ") AS pet_rate " +
+                "FROM " + DataBaseConstants.TABLE_PETS + " AS p JOIN " +
+                DataBaseConstants.TABLE_RATE_PET + " AS r " +
+                "ON r." + DataBaseConstants.TABLE_RATE_PET_ID + " = p." +
+                DataBaseConstants.TABLE_PETS_ID +
+                " GROUP BY p." + DataBaseConstants.TABLE_PETS_ID +
+                " ORDER BY pet_rate DESC LIMIT 5;";
+
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor result = db.rawQuery(query, null);
 
         while (result.moveToNext()) {
             Pet currentPet = new Pet();
+            currentPet.setPetId(result.getInt(0));
             currentPet.setName(result.getString(1));
             currentPet.setAvatar(result.getInt(2));
-            currentPet.setRate(13);
+            currentPet.setRate(result.getInt(3));
 
             petsList.add(currentPet);
         }
