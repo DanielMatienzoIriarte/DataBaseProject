@@ -2,6 +2,7 @@ package com.example.danmat.databaseproject.presenter;
 
 import android.content.Context;
 
+import com.example.danmat.databaseproject.R;
 import com.example.danmat.databaseproject.db.PetsConstructor;
 import com.example.danmat.databaseproject.fragments.IRecyclerViewFragmentView;
 import com.example.danmat.databaseproject.pojo.Pet;
@@ -17,7 +18,27 @@ public class RecyclerViewFragmentPresenter implements IRecyclerViewFragmentPrese
     public RecyclerViewFragmentPresenter(IRecyclerViewFragmentView iRecyclerViewFragmentView, Context context) {
         this.iRecyclerViewFragmentView = iRecyclerViewFragmentView;
         this.context = context;
+        insertPets();
         getDatabasePets();
+    }
+
+    public void insertPets() {
+        Pet pet1 = new Pet(1, "Mortis", R.drawable.dog_bark_icon);
+        Pet pet2 = new Pet(2, "Vato Loco", R.drawable.dog_chihuahua_bone_icon);
+        Pet pet3 = new Pet(3, "Gordo", R.drawable.dog_dalmatian_king_icon);
+        Pet pet4 = new Pet(4, "Rita", R.drawable.dog_einstein_icon);
+        Pet pet5 = new Pet(5, "Laika", R.drawable.dog_haski_icon);
+        Pet pet6 = new Pet(6, "Dogo", R.drawable.dog_einstein_icon);
+        Pet pet7 = new Pet(7, "Linda", R.drawable.dog_haski_icon);
+
+        petsConstructor = new PetsConstructor(context);
+        petsConstructor.insertPet(pet1);
+        petsConstructor.insertPet(pet3);
+        petsConstructor.insertPet(pet2);
+        petsConstructor.insertPet(pet4);
+        petsConstructor.insertPet(pet5);
+        petsConstructor.insertPet(pet6);
+        petsConstructor.insertPet(pet7);
     }
 
     @Override

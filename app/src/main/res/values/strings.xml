@@ -3,7 +3,7 @@
     <string name="cardview_textview_name">Name</string>
     <string name="cardview_imageview_avatar">Avatar</string>
     <string name="cardview_imageview_rate_icon_icon">Rate</string>
-    <string name="cardview_textview_rate_icon_rate_value">RateValue</string>
+    <string name="cardview_textview_rate_icon_rate_value">0</string>
     <string name="cardview_imageview_rate_icon_rate_value_icon">RateValueIcon</string>
     <string name="main_options_menu_contact">Contact</string>
     <string name="main_options_menu_about">About</string>

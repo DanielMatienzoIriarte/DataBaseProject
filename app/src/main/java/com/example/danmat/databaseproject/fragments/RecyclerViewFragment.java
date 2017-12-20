@@ -67,3 +67,11 @@ public class RecyclerViewFragment extends Fragment implements IRecyclerViewFragm
         petsListRecyclerView.setAdapter(petAdapter);
     }
 }
+
+
+
+
+
+
+
+

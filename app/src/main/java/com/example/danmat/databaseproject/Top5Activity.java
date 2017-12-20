@@ -2,6 +2,8 @@ package com.example.danmat.databaseproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,15 +12,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.danmat.databaseproject.adapters.PagerAdapter;
 import com.example.danmat.databaseproject.adapters.PetAdapter;
+import com.example.danmat.databaseproject.fragments.ProfileFragment;
+import com.example.danmat.databaseproject.fragments.RecyclerViewFragment;
+import com.example.danmat.databaseproject.fragments.RecyclerViewTop5;
 import com.example.danmat.databaseproject.pojo.Pet;
 
 import java.util.ArrayList;
 
 public class Top5Activity extends AppCompatActivity {
     private Toolbar toolbar;
-    private RecyclerView top5RecyclerView;
-    ArrayList<Pet> petsList;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +31,11 @@ public class Top5Activity extends AppCompatActivity {
         setContentView(R.layout.activity_top5);
 
         toolbar = (Toolbar) findViewById(R.id.actionbar);
+        viewPager = (ViewPager) findViewById(R.id.viewPager_top5);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*top5RecyclerView =(RecyclerView) findViewById(R.id.main_recyclerView_top5);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        top5RecyclerView.setLayoutManager(linearLayoutManager);
-
-        initializePetsList();
-        initializeAdapter();*/
+        setUpViewPager();
     }
 
     @Override
@@ -65,19 +64,15 @@ public class Top5Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initializePetsList(){
-        petsList = new ArrayList<Pet>();
-        petsList.add(new Pet(1, "1", R.drawable.dog_bark_icon));
-        petsList.add(new Pet(2, "2", R.drawable.dog_chihuahua_bone_icon));
-        petsList.add(new Pet(3, "3", R.drawable.dog_dalmatian_king_icon));
-        petsList.add(new Pet(4, "4", R.drawable.dog_einstein_icon));
-        petsList.add(new Pet(5, "5", R.drawable.dog_haski_icon));
-        petsList.add(new Pet(6, "6", R.drawable.dog_einstein_icon));
-        petsList.add(new Pet(7, "7", R.drawable.dog_haski_icon));
+    private ArrayList<Fragment> addFragments() {
+        ArrayList<Fragment> fragments = new ArrayList<>();
+
+        fragments.add(new RecyclerViewTop5());
+
+        return fragments;
     }
 
-    private void initializeAdapter(){
-        PetAdapter petAdapter = new PetAdapter(petsList, this);
-        top5RecyclerView.setAdapter(petAdapter);
+    public void setUpViewPager() {
+        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), addFragments()));
     }
 }

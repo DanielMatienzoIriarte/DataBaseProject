@@ -16,24 +16,15 @@ public class PetsConstructor {
     }
 
     public ArrayList<Pet> getData() {
-        //DataBase db = new DataBase(context);
-        //return db.getAll();
-        ArrayList<Pet> petsList = new ArrayList<Pet>();
-        petsList.add(new Pet(1, "Mortis", R.drawable.dog_bark_icon));
-        petsList.add(new Pet(2, "Vato Loco", R.drawable.dog_chihuahua_bone_icon));
-        petsList.add(new Pet(3, "Gordo", R.drawable.dog_dalmatian_king_icon));
-        petsList.add(new Pet(4, "Rita", R.drawable.dog_einstein_icon));
-        petsList.add(new Pet(5, "Laika", R.drawable.dog_haski_icon));
-        petsList.add(new Pet(6, "Dogo", R.drawable.dog_einstein_icon));
-        petsList.add(new Pet(7, "Linda", R.drawable.dog_haski_icon));
-
-        return petsList;
+        DataBase db = new DataBase(context);
+        return db.getAll();
     }
 
-    public void insertPet(DataBase db) {
+    public void insertPet(Pet pet) {
+        DataBase db = new DataBase(context);
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DataBaseConstants.TABLE_PETS_NAME, "Kareem");
-        contentValues.put(DataBaseConstants.TABLE_PETS_AVATAR, R.drawable.cat_avatar);
+        contentValues.put(DataBaseConstants.TABLE_PETS_NAME, pet.getName());
+        contentValues.put(DataBaseConstants.TABLE_PETS_AVATAR, pet.getAvatar());
 
         db.insertPet(contentValues);
     }
@@ -50,5 +41,10 @@ public class PetsConstructor {
     public int getPetRate(Pet pet) {
         DataBase db = new DataBase(context);
         return db.getPetRate(pet);
+    }
+
+    public ArrayList<Pet> getTop5() {
+        DataBase db = new DataBase(context);
+        return db.getTop5();
     }
 }
